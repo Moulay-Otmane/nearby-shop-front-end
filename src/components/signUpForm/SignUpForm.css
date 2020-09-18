@@ -1,0 +1,34 @@
+.form-controle-feedback-invalid{
+    color: red;
+    margin-left: 5px;
+}
+
+.form-row-style{
+    justify-content: space-evenly;
+    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#address-info-col{
+    border-left: rgb(197, 197, 197) solid 1px;
+}
+
+#sign-up-button-container{
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+#sign-up-container-title{
+    justify-content: center;
+    color: #5260ff ;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    margin-bottom: 50px;
+}
+
+#link-to-login-page{
+    float: right;
+    margin-top: 10px;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+}
+
+

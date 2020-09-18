@@ -1,0 +1,22 @@
+.img-fluid{
+    min-height: 100% !important;
+    min-width: 100% !important;
+}
+
+#application-img-container{
+    padding:0px ;
+    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#login-form-col{
+    background: rgba(255, 255, 255, 0.8); 
+    padding:2%;
+    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.7)
+}
+
+#sign-up-redirection-link{
+    display:block; 
+    margin-top:30px;
+    text-align:center; 
+    font-family:'Comic Sans MS', cursive, sans-serif,'Trebuchet MS', Helvetica, sans-serif;
+}

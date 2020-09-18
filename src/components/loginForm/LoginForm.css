@@ -1,0 +1,14 @@
+#login-form-invalid-feedback{
+    color:red ;
+    display:block;
+    text-align:center;
+    margin-bottom:20px;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+
+#sign-in-label{
+    text-align:center;
+    color:#5260ff;
+    font-family:'Comic Sans MS', 'Comic Sans', cursive;
+    margin-bottom:20px
+}
