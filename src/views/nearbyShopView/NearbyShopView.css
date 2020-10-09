@@ -1,0 +1,43 @@
+.nearby-shop-view-container{
+    margin-bottom: 50px;
+    margin-top: 100px;
+}
+
+.nearby-shop-view-card-col{
+    margin-bottom: 30px !important;
+}
+
+.nearby-shop-view-card-container{
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+#display-search-form-button{
+    border-radius: 50%;
+    box-shadow:4px 4px 4px 4px rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.9);
+    margin-left: 30px;
+    animation: signal-color 1.5s infinite;;
+}
+
+@keyframes signal-color {
+    0% {background-color: rgb(0, 110, 255);}
+  50%{background-color:rgb(0, 162, 255);}
+  100%{background-color:rgb(0, 110, 255);}
+}
+
+#search-form-container{
+    position: fixed;
+    bottom: 50px;
+    left: 0px;
+}
+
+#empty-result-nearby-shop{
+    background-color:rgba(255, 255, 255, 0.8);
+    padding-top:50px;
+    padding-bottom:50px;
+    text-align:center;
+    display:block;
+    font-family:Comic, cursive, sans-serif,'Trebuchet MS', Helvetica, sans-serif; 
+    font-weight:bold;
+    border-radius:8px;
+}

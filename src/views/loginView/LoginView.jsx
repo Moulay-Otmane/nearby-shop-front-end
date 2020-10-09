@@ -13,7 +13,7 @@ export default class LoginView extends Component {
                 <Container className="background-img-filter"  fluid={true}>
                     <Row style={{ justifyContent:"center" }}>
                         <Col md lg="6" id="application-img-container">
-                            <img src={firstPageIcon} alt="Nearby shops" class="img-fluid"/> 
+                            <img src={firstPageIcon} alt="Nearby shops" className="img-fluid"/> 
                         </Col>
                         <Col md lg="4" id="login-form-col">
                             <Container style={{ padding:"3%", height:"100%"}}>

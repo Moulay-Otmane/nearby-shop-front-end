@@ -4,9 +4,9 @@ import './SignUpForm.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 import userService from '../../services/userService/UserService';
-import shopService from '../../services/shopService/ShopService';
+import cityService from '../../services/cityService/CityService';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 import { BarLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 
@@ -74,21 +74,27 @@ export default class SignUpForm extends Component{
 
 
     setCitiesName(){
-        let cities = [];
-        cities = shopService.getCities()
-        .map(city => city.name);
-        this.setState({cityNames: cities})
+        this.setState({cityNames : []});
+        cityService.getCities()
+        .then( cityList => {
+            this.setState({cityNames : cityList.map(city => city.name)});
+        }).catch(error => {
+            toast.error("Error while retrieving cities list")
+        })
+        
     }
 
     setAddressList(targetCity){
-        let addressList = [];
+        this.setState({selectedAddress:'',addressList: []});
         if(targetCity.length > 0){
-            addressList = shopService.getCities()
-            .filter(city => city.name === targetCity)
-            .shift()
-            .addressList;
+
+            cityService.getCities()
+            .then( cityList => {
+                this.setState({addressList : cityList.filter(city => city.name === targetCity).shift().addressList});
+            }).catch(error => {
+                toast.error("Error while retrieving cities list")
+            })
         }
-        this.setState({selectedAddress:'',addressList: addressList});
     }
 
     handleSubmit(event){
@@ -204,7 +210,7 @@ export default class SignUpForm extends Component{
                                         value={this.state.city}
                                         onChange={event => (this.setState({isCityValid : true, city: event.target.value}), this.setAddressList(event.target.value))}
                                         >
-                                        <option value="" disabled selected hidden>Choose a city ...</option>
+                                        <option value="" disabled hidden>Choose a city ...</option>
                                         {
                                             this.state.cityNames.map(cityName => <option value={cityName} key={cityName}> {cityName} </option> )
                                         }
@@ -221,11 +227,11 @@ export default class SignUpForm extends Component{
                                         name="location" 
                                         className="form-control-input"
                                         value={this.state.selectedAddress}
-                                        onChange={event =>(this.setState({isAddressValid : true, location:JSON.parse(event.target.value).location, selectedAddress: JSON.parse(event.target.value).address}))}
+                                        onChange={event =>this.setState({isAddressValid : true, location:JSON.parse(event.target.value).location, selectedAddress: event.target.value})}
                                         >
-                                        <option value="" disabled selected hidden>Choose an address ...</option>
+                                        <option value="" disabled hidden>Choose an address ...</option>
                                         {
-                                            this.state.addressList.map(element => <option value={JSON.stringify(element.location)} key={element.address}> {element.address} </option>  )
+                                            this.state.addressList.map(element => <option value={JSON.stringify(element)} key={element.addressLine}> {element.addressLine} </option>  )
                                         }
                                     </FormControl>
                                     {!this.state.isAddressValid?

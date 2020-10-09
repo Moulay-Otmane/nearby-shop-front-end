@@ -2,7 +2,8 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import authenticationService from '../../services/authenticationService/AuthenticationService';
 import LoginForm from './LoginForm';
-import { resolvedHttpResponse, jwtToken, rejectedHttpResponse } from '../../utils/FixturesConstructors'
+import { resolvedHttpResponse, jwtToken, rejectedHttpResponse } from '../../utils/FixturesConstructors';
+import { routeLinks } from '../../utils/RouteLinks'
 
 describe('unit tests of the component LoginForm',() => {
 
@@ -38,7 +39,7 @@ describe('unit tests of the component LoginForm',() => {
         expect(authenticate).toHaveBeenCalledWith(loginInformations);
         expect(wrapper.find('#login-form-invalid-feedback').exists()).toEqual(false);
         expect(localStorage.length).toEqual(1);
-        expect(history.push).toHaveBeenCalledWith("/shops");
+        expect(history.push).toHaveBeenCalledWith(routeLinks.NEARBY_SHOPS);
         localStorage.clear();
         jest.resetAllMocks();
     });

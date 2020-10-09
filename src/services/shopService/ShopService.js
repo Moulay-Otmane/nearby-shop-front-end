@@ -1,49 +1,32 @@
+import handleResponse from '../../utils/ResponseHandler';
+import { sendRequest } from '../../utils/RequestManager';
 class ShopService{
 
-    getCities(){
-        const cities = [
-            {
-                name:"Casablanca",
-                addressList:[
-                    {
-                        address:'Maarif',
-                        location:{
-                            latitude:'5678',
-                            longitude:'1234'
-                        }
-                    },
-                    {
-                        address:'avenue mohamed 5',
-                        location:{
-                            latitude:'5611',
-                            longitude:'12224'
-                        }
-                    }
-                ]
-            },
-            {
-                name:"Fes",
-                addressList:[
-                    {
-                        address:'avenue mohamed 6',
-                        location:{
-                            latitude:'563338',
-                            longitude:'32222'
-                        }
-                    },
-                    {
-                        address:'avenue hassan 2',
-                        location:{
-                            latitude:'5621178',
-                            longitude:'12112134'
-                        }
-                    }
-                ]
-            }
-            
-            
-        ];
-        return cities;
+    getFavoritesShops(){
+        return sendRequest('/rest-service/shops/favorites', 'get', null, true)
+        .then(handleResponse)
+        .then(response => response.json())
+    }
+
+    getNearbyShopsByDefaultLocation(){
+        return sendRequest('/rest-service/shops/find-by-default-location', 'get', null, true)
+        .then(handleResponse)
+        .then(response => response.json())
+    }
+
+    getNearbyShopsByCustomLocation( location){
+        return sendRequest(`/rest-service/shops/find-by-custom-location?longitude=${location.x}&latitude=${location.y}`, 'get', null, true)
+        .then(handleResponse)
+        .then(response => response.json())
+    }
+
+    removeShopFromFavorites(shopId){
+        return sendRequest(`/rest-service/shops/remove-from-favorite/${shopId}`, 'PATCH', null, true)
+        .then(handleResponse)
+    }
+
+    addOrUpdateUserReactionAboutShop(shopId, reactionType){
+        return sendRequest(`/rest-service/shops/add-reaction/${shopId}`, 'PATCH', JSON.stringify({ reactionType : reactionType }), true).then(handleResponse)
     }
 
 }

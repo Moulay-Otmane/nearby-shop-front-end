@@ -1,0 +1,41 @@
+.shop-information-row{
+    font-size: small;
+    margin-bottom: 10px;
+}
+
+.shop-information-row:last-child{
+    margin-bottom: 0px;
+}
+
+.shop-card-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.information-col{
+    padding-left: 12px;
+}
+
+.picture-row{
+    margin-bottom: 20px;
+}
+
+.information-icon.distance{
+    margin-right: 12px;
+}
+
+.shop-information-row.distance{
+    font-weight: 700;
+    color: rgb(158, 155, 155);
+}
+
+.shop-card{
+    height: 100%;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgb(239, 243, 247)) ;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.shop-picture{
+    height: 150px;
+}

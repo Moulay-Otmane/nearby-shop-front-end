@@ -41,7 +41,7 @@ export default class LoginForm extends Component {
             .then( generatedToken => {
                 localStorage.setItem('token',generatedToken.token)
                 this.setState({isWaiting:false});
-                this.props.history.push('/shops')
+                this.props.history.push('/nearby-shops')
             }).catch(error => {
                 this.setState({isFormValid:false, password:'', isWaiting:false});
             });

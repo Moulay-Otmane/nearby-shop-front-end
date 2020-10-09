@@ -1,0 +1,11 @@
+.footer-style{
+    font-family: 'Comic Sans MS', cursive, sans-serif,'Trebuchet MS', Helvetica, sans-serif;
+    height:40px;
+    margin-top:-40px; 
+    color: rgb(122, 121, 121);
+    background-color:rgba(244, 244, 244,0.9);
+    text-align:center; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}

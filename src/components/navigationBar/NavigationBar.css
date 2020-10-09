@@ -1,0 +1,18 @@
+.navbar-brand-style{
+    color: white !important;
+    font-weight: 700 !important;
+    font-family:'Comic Sans MS', cursive, sans-serif,'Trebuchet MS', Helvetica, sans-serif;
+}
+
+.nav-bar-style img{
+    filter: grayscale(10); 
+}
+ .nav-bar-style{
+     background-color: linear-gradient(to right, rgba(0, 123, 255), rgb(86, 173, 255)) !important;
+     font-family:'Comic Sans MS', cursive, sans-serif,'Trebuchet MS', Helvetica, sans-serif !important;
+ }
+
+.nav-link-style.current-path{
+    border-bottom: 2px solid;
+    color: rgb(216, 226, 247) !important;
+}

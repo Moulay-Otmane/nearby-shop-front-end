@@ -1,19 +1,22 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import userService from '../../services/userService/UserService';
-import shopService from '../../services/shopService/ShopService';
+import cityService from '../../services/cityService/CityService';
 import SignUpForm from './SignUpForm';
+import {toast} from 'react-toastify';
 import { resolvedHttpResponse, rejectedHttpResponse, cities } from '../../utils/FixturesConstructors';
 
 describe('unit tests of the component signUpForm', () => {
 
     it('should render signUpForm', () => {
         const citiesList = cities(); 
-        const getCitiesList = jest.spyOn(shopService, "getCities").mockImplementationOnce(() => citiesList);
+        const getCitiesList = jest.spyOn(cityService, "getCities").mockImplementationOnce(() => resolvedHttpResponse(citiesList));
         const wrapper = shallow(<SignUpForm/>);
         expect(getCitiesList).toHaveBeenCalled();
         expect(wrapper.find('Form').exists()).toEqual(true);
         expect(wrapper.find('Form FormControl').length).toEqual(5);
+        expect(wrapper.find({'name':'city'}).exists()).toEqual(true);
+        expect(wrapper.find({'name':'location'}).exists()).toEqual(true);
         expect(wrapper.find('option').length).toEqual(2+citiesList.length);
         expect(wrapper.find({'name':'city'}).find('option').length).toEqual(1+citiesList.length);
         expect(wrapper.find({'name':'location'}).find('option').length).toEqual(1);
@@ -21,9 +24,17 @@ describe('unit tests of the component signUpForm', () => {
         expect(wrapper.find({'name':'email'}).exists()).toEqual(true);
         expect(wrapper.find({'name':'password'}).exists()).toEqual(true);
         expect(wrapper.find({'name':'passwordConfirmation'}).exists()).toEqual(true);
-        expect(wrapper.find({'name':'city'}).exists()).toEqual(true);
-        expect(wrapper.find({'name':'location'}).exists()).toEqual(true);
         expect(wrapper.find('Form Button').exists()).toEqual(true);
+        jest.resetAllMocks();
+    });
+
+    it('should display an error message if there was an error while retrieving cities list', () => {
+        const displayError = jest.spyOn(toast, 'error').mockImplementationOnce(() => {})
+        const getCitiesList = jest.spyOn(cityService, "getCities").mockImplementationOnce(() => rejectedHttpResponse());
+        shallow(<SignUpForm/>);
+        expect(getCitiesList).toHaveBeenCalled();
+        expect(displayError).toHaveBeenCalled();
+        jest.resetAllMocks();
     });
 
     it('should create user account when all user informations are corrects', async () => {
@@ -36,7 +47,7 @@ describe('unit tests of the component signUpForm', () => {
             city:aCity.name,
             location:anAddress.location
         };
-        const getCitiesList = jest.spyOn(shopService, "getCities").mockImplementation(() => citiesList);
+        const getCitiesList = jest.spyOn(cityService, "getCities").mockImplementation(() => resolvedHttpResponse(citiesList));
         const wrapper = shallow(<SignUpForm/>);
         const okSignUpHttpResponse =  resolvedHttpResponse();
         const signUp = jest.spyOn(userService, 'signUp').mockImplementationOnce(()=> okSignUpHttpResponse);
@@ -73,7 +84,7 @@ describe('unit tests of the component signUpForm', () => {
             city:aCity.name,
             location:anAddress.location
         };
-        const getCitiesList = jest.spyOn(shopService, "getCities").mockImplementation(() => citiesList);
+        const getCitiesList = jest.spyOn(cityService, "getCities").mockImplementation(() => resolvedHttpResponse(citiesList));
         const wrapper = shallow(<SignUpForm/>);
         const okSignUpHttpResponse =  resolvedHttpResponse();
         const signUp = jest.spyOn(userService, 'signUp').mockImplementationOnce(()=> okSignUpHttpResponse);
@@ -111,7 +122,7 @@ describe('unit tests of the component signUpForm', () => {
             city:aCity.name,
             location:anAddress.location
         };
-        const getCitiesList = jest.spyOn(shopService, "getCities").mockImplementation(() => citiesList);
+        const getCitiesList = jest.spyOn(cityService, "getCities").mockImplementation(() => resolvedHttpResponse(citiesList));
         const wrapper = shallow(<SignUpForm/>);
         const okSignUpHttpResponse =  resolvedHttpResponse();
         const signUp = jest.spyOn(userService, 'signUp').mockImplementationOnce(()=> okSignUpHttpResponse);
@@ -150,7 +161,7 @@ describe('unit tests of the component signUpForm', () => {
             location:anAddress.location
         };
         const wrongPasswordConfirmation = "11111111";
-        const getCitiesList = jest.spyOn(shopService, "getCities").mockImplementation(() => citiesList);
+        const getCitiesList = jest.spyOn(cityService, "getCities").mockImplementation(() => resolvedHttpResponse(citiesList));
         const wrapper = shallow(<SignUpForm/>);
         const okSignUpHttpResponse =  resolvedHttpResponse();
         const signUp = jest.spyOn(userService, 'signUp').mockImplementationOnce(()=> okSignUpHttpResponse);
@@ -184,7 +195,7 @@ describe('unit tests of the component signUpForm', () => {
             email:"valid@email.com",
             password:"12345678",
         };
-        const getCitiesList = jest.spyOn(shopService, "getCities").mockImplementation(() => citiesList);
+        const getCitiesList = jest.spyOn(cityService, "getCities").mockImplementation(() => resolvedHttpResponse(citiesList));
         const wrapper = shallow(<SignUpForm/>);
         const okSignUpHttpResponse =  resolvedHttpResponse();
         const signUp = jest.spyOn(userService, 'signUp').mockImplementationOnce(()=> okSignUpHttpResponse);
@@ -218,7 +229,7 @@ describe('unit tests of the component signUpForm', () => {
             password:"12345678",
             city:aCity.name
         };
-        const getCitiesList = jest.spyOn(shopService, "getCities").mockImplementation(() => citiesList);
+        const getCitiesList = jest.spyOn(cityService, "getCities").mockImplementation(() => resolvedHttpResponse(citiesList));
         const wrapper = shallow(<SignUpForm/>);
         const okSignUpHttpResponse =  resolvedHttpResponse();
         const signUp = jest.spyOn(userService, 'signUp').mockImplementationOnce(()=> okSignUpHttpResponse);
@@ -255,7 +266,7 @@ describe('unit tests of the component signUpForm', () => {
             city:aCity.name,
             location:anAddress.location
         };
-        const getCitiesList = jest.spyOn(shopService, "getCities").mockImplementation(() => citiesList);
+        const getCitiesList = jest.spyOn(cityService, "getCities").mockImplementation(() => resolvedHttpResponse(citiesList));
         const wrapper = shallow(<SignUpForm/>);
         const response = {
                             exceptionMessage: "EMAIL_ALREADY_USED"

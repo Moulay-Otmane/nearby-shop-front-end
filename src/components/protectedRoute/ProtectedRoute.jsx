@@ -18,7 +18,7 @@ const ProtectedRoute = ({component : Component}, ...rest) => {
         .catch(()=>{
             setTokenValidated(true);
         });
-    });
+    },[]);
 
     return <Route render={(props)=> wasTokenValidated ?  (isTokenValid ? <Component {...props}/> : <LoginView {...props}/> ) : <LoadingView /> } {...rest}/>
 }
